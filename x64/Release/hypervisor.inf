@@ -1,0 +1,80 @@
+;
+; hypervisor.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System ; TODO: specify appropriate Class
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=hypervisor.cat
+DriverVer = 04/08/2022,15.11.39.733
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+hypervisor_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+hypervisor.sys  = 1,,
+;
+
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%hypervisor.DeviceDesc%=hypervisor_Device, Root\hypervisor ; TODO: edit hw-id
+
+[hypervisor_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+hypervisor.sys
+
+;-------------- Service installation
+[hypervisor_Device.NT.Services]
+AddService = hypervisor,%SPSVCINST_ASSOCSERVICE%, hypervisor_Service_Inst
+
+; -------------- hypervisor driver install sections
+[hypervisor_Service_Inst]
+DisplayName    = %hypervisor.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\hypervisor.sys
+
+;
+;--- hypervisor_Device Coinstaller installation ------
+;
+
+[hypervisor_Device.NT.CoInstallers]
+AddReg=hypervisor_Device_CoInstaller_AddReg
+CopyFiles=hypervisor_Device_CoInstaller_CopyFiles
+
+[hypervisor_Device_CoInstaller_AddReg]
+;
+
+
+[hypervisor_Device_CoInstaller_CopyFiles]
+;
+
+
+[hypervisor_Device.NT.Wdf]
+KmdfService =  hypervisor, hypervisor_wdfsect
+[hypervisor_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "hypervisor Installation Disk"
+hypervisor.DeviceDesc = "hypervisor Device"
+hypervisor.SVCDESC = "hypervisor Service"

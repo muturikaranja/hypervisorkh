@@ -1,0 +1,23 @@
+﻿  Building 'hypervisor' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Release\hypervisor.inf
+  Stamping [Version] section with DriverVer=04/08/2022,15.11.39.733
+  hypervisor.c
+  hypervisor.vcxproj -> C:\Users\gdgqrwwrqg\source\repos\hypervisor\x64\Release\hypervisor.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\gdgqrwwrqg\source\repos\hypervisor\x64\Release\hypervisor.sys
+  
+  Driver is 'Universal'.
+  .........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\gdgqrwwrqg\source\repos\hypervisor\x64\Release\hypervisor\hypervisor.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\gdgqrwwrqg\source\repos\hypervisor\x64\Release\hypervisor\hypervisor.cat
+  
